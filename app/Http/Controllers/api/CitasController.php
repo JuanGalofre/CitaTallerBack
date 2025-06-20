@@ -40,7 +40,7 @@ class CitasController extends Controller
             $usuario = $this->encontrarUsuarioPorJWT();
 
             if (Gate::allows('obtener-todas-citas')) {
-                return response()->json(Cita::all());
+                return response()->json(Cita::orderBy('fecha','desc')->get());
             }else{
                 return response()->json(Cita::where('user_id',$usuario->id)->get());
             }
